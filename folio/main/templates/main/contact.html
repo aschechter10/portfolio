@@ -1,0 +1,85 @@
+{% extends 'main/layout.html' %}
+
+{% block title %}aschechter.dev | Contact{% endblock %}
+
+{% block body %}
+<section class="hero is-primary">
+    <div class="hero-body">
+        <p class="title has-text-info">
+            Thanks for reaching out, I'm excited to meet you!
+        </p>
+    </div>
+</section>
+
+<div style="display: flex; justify-content: center; width: 100%;" class="mt-6">
+    <article class="message is-danger animate__animated" style="display: none; width: 60vw;" id="errorMsg">
+        <div class="message-header">
+          <p>Error</p>
+          <button class="delete" aria-label="delete"></button>
+        </div>
+        <div class="message-body">
+          Something went wrong
+        </div>
+      </article>
+</div>
+
+<form action="{% url 'contact_req' %}" method="POST" id="contactForm">
+    {% csrf_token %}
+    <section class="animate__animated animate__jackInTheBox ml-6 mr-6 mb-6" style="display: flex; flex-direction: column; align-items: center;">
+        <div class="level" style="width: 50vw;">
+            <div class="level-left">
+                <div class="field">
+                    <label class="label">Name</label>
+                    <div class="control">
+                      <input class="input" type="text" style="width: 24vw;" id="namePut" name="name">
+                    </div>
+                </div>
+            </div>
+            <div class="level-right">
+                <div class="field">
+                    <label class="label">Email/Phone Number</label>
+                    <div class="control">
+                      <input class="input" type="text" style="width: 24vw;" id="emailPut" name="email">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="field">
+            <label class="label">Message</label>
+            <div class="control">
+              <textarea class="textarea" style="width: 50vw;" rows="10" name="message"></textarea>
+            </div>
+        </div>
+        <div class="mt-4">
+            <button type="submit" class="button is-link is-medium is-rounded" id="submitBtn">Send it</button>
+        </div>
+    </section>
+</form>
+
+<script type="text/javascript">
+    $('#submitBtn').click(function(e) {
+        e.preventDefault();
+
+        if ($('#namePut').val() == "" || $('#emailPut').val() == "") {
+            displayMessage("Name and Email/Phone Number cannot be left blank");
+        } else {
+            $('#contactForm').submit();
+        }
+    })
+
+    function displayMessage(message) {
+        $('#errorMsg').css({
+            "display": "block"
+        });
+        $('.message-body').html(message);
+        $('#errorMsg').addClass('animate__fadeInDown mb-6');
+    }
+
+    $('.delete').click(function() {
+        $('#errorMsg').css({
+            "display": "none"
+        });
+    })
+</script>
+
+{% endblock %}

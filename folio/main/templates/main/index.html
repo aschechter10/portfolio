@@ -1,16 +1,39 @@
-{% load static %}
+{% extends 'main/layout.html' %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'main/bulma/css/bulma.css' %}">
-    <link rel="stylesheet" href="{% static 'main/animate.css-main/animate.css' %}">
-    <title>Document</title>
-</head>
-<body>
-    <h1 class="title animate__animated animate__bounce has-text-primary">Hello World</h1>
-</body>
-</html>
+{% block title %}aschechter.dev{% endblock %}
+
+{% block body %}
+
+{% if success_msg %}
+<div style="display: flex; justify-content: center; width: 100%;" class="has-background-primary">
+  <article class="message is-success animate__animated animate__lightSpeedInLeft" style="width: 90vw;" id="errorMsg">
+      <div class="message-header">
+        <p>Hooray!</p>
+        <button class="delete" aria-label="delete"></button>
+      </div>
+      <div class="message-body">
+        {{ success_msg }}
+      </div>
+    </article>
+</div>
+{% endif %}
+
+<section class="hero is-medium is-primary">
+    <div class="hero-body">
+      <p class="title has-text-info animate__animated animate__fadeInLeftBig is-size-1 animate__slow">
+        Hello, I'm Ari
+      </p>
+      <p class="subtitle has-text-link animate__animated animate__fadeInUp animate__delay-2s" id="hero-sub">
+        Take a look around, get to know me
+      </p>
+    </div>
+</section>
+
+<script type="text/javascript">
+  $('.delete').click(function() {
+        $('#errorMsg').css({
+            "display": "none"
+        });
+    })
+</script>
+{% endblock %}

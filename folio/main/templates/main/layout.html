@@ -1,0 +1,89 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'main/bulma/css/bulma.css' %}">
+    <link rel="stylesheet" href="{% static 'main/animate.css-main/animate.css' %}">
+    <script type="text/javascript" src="{% static 'main/jquery-3.6.0.min.js' %}"></script>
+    <script src="https://kit.fontawesome.com/fcc33fd7db.js" crossorigin="anonymous"></script>
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+    <nav class="navbar is-primary p-6" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+          <a class="navbar-item" href="/" id="nav-home">
+            <header class="has-text-weight-bold">aschechter.dev</header>
+          </a>
+      
+          <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
+        </div>
+      
+          <div class="navbar-end">
+            <div id="navbarBasicExample" class="navbar-menu">
+                <div class="navbar-start">
+                  <a class="navbar-item animate__animated animate__slower" id="nav-try-me">
+                    Try me!
+                  </a>
+
+                  <a class="navbar-item ml-5" href="{% url 'projects' %}">
+                    Projects
+                  </a>
+            
+                  <a class="navbar-item ml-5" href="{% url 'resume' %}">
+                    Resume
+                  </a>
+            
+                  <div class="navbar-item ml-5 animate__animated" id="nav-contact">
+                    <a class="button is-info is-rounded" href="{% url 'contact' %}">
+                      Contact me
+                    </a>
+                  </div>
+                </div>
+        </div>
+      </nav>
+
+    {% block body %}
+    {% endblock %}
+
+    <footer class="footer has-background-info">
+      <div class="content has-text-centered has-text-white" style="display:flex; flex-direction: column; justify-content: center;  align-items: center;">
+        <p>
+          Developed by Ariel Schechter
+        </p>
+        <div class="level" style="width: 28vw;">
+          <div class="level-left">
+            <span class="icon-text">
+              <span class="icon">
+                <i class="fas fa-phone-square"></i>
+              </span>
+              <span>(312)-493-0606</span>
+            </span>
+          </div>
+          <div class="level-right">
+            <span class="icon-text">
+              <span class="icon">
+                <i class="fas fa-envelope-open-text"></i>
+              </span>
+              <span>aschechter03@gmail.com</span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script type="text/javascript">
+      $('#nav-try-me').click(function() {
+        $('#nav-try-me').addClass('animate__hinge');
+        $('#nav-try-me').html('Not again :(');
+      })
+  </script>
+</body>
+</html>
